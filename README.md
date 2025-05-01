@@ -30,6 +30,9 @@ A robust and modular backend API for managing school operations such as teachers
 
 ---
 
+![ERD Diagram](drawSQL.png)
+
+
 📚 Backend API Endpoints
 
 

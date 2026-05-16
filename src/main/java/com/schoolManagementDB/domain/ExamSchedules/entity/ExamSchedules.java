@@ -2,9 +2,9 @@ package com.schoolManagementDB.domain.ExamSchedules.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.schoolManagementDB.entities.ExamDuties;
-import com.schoolManagementDB.entities.Section;
-import com.schoolManagementDB.entities.Subject;
+import com.schoolManagementDB.domain.ExamDuties.entity.ExamDuties;
+import com.schoolManagementDB.domain.Section.entity.Section;
+import com.schoolManagementDB.domain.Subject.entity.Subject;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

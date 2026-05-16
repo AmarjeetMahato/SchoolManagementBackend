@@ -4,7 +4,6 @@ import com.schoolManagementDB.dtos.ClassDto;
 import com.schoolManagementDB.entities.Classes;
 import com.schoolManagementDB.exceptions.InternalServerError;
 import com.schoolManagementDB.exceptions.ResourceNotFoundException;
-import com.schoolManagementDB.mappers.ClassMapper;
 import com.schoolManagementDB.repositories.ClassRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

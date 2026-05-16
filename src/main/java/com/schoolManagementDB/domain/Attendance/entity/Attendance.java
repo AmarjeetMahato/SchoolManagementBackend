@@ -1,9 +1,9 @@
 package com.schoolManagementDB.domain.Attendance.entity;
 
 
-import com.schoolManagementDB.entities.Section;
-import com.schoolManagementDB.entities.Students;
-import com.schoolManagementDB.entities.Subject;
+import com.schoolManagementDB.domain.Section.entity.Section;
+import com.schoolManagementDB.domain.Students.entity.Student;
+import com.schoolManagementDB.domain.Subject.entity.Subject;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -40,7 +40,7 @@ public class Attendance {
     // ✅ Student Relationship
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
-    private Students student;
+    private Student student;
 
     // ✅ Section Relationship
     @ManyToOne(fetch = FetchType.LAZY)

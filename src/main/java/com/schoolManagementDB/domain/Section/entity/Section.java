@@ -1,7 +1,11 @@
 package com.schoolManagementDB.domain.Section.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.schoolManagementDB.entities.*;
+import com.schoolManagementDB.domain.Attendance.entity.Attendance;
+import com.schoolManagementDB.domain.Classes.entity.Classes;
+import com.schoolManagementDB.domain.ExamSchedules.entity.ExamSchedules;
+import com.schoolManagementDB.domain.Students.entity.Student;
+import com.schoolManagementDB.services.TeacherSubjectSection.TeacherSubjectSection;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -55,14 +59,14 @@ public class Section {
 
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Students> students;
+    private List<Student> students;
 
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ExamSchedules> examSchedules;
 
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
-    private List<Teacher_Subject_Section> teacherSubjectSections;
+    private List<TeacherSubjectSection> teacherSubjectSections;
 
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
     private List<Attendance> attendanceList;

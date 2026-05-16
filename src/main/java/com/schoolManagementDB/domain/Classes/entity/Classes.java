@@ -2,10 +2,10 @@ package com.schoolManagementDB.domain.Classes.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.schoolManagementDB.entities.Section;
-import com.schoolManagementDB.entities.Students;
-import com.schoolManagementDB.entities.Subject;
-import com.schoolManagementDB.entities.Teacher;
+import com.schoolManagementDB.domain.Section.entity.Section;
+import com.schoolManagementDB.domain.Students.entity.Student;
+import com.schoolManagementDB.domain.Subject.entity.Subject;
+import com.schoolManagementDB.domain.Teacher.entity.Teacher;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -52,7 +52,7 @@ public class Classes {
     private List<Section> sections;
 
     @OneToMany(mappedBy = "classes", cascade = CascadeType.ALL)
-    private List<Students> students;
+    private List<Student> students;
 
     @OneToMany(mappedBy = "classes", cascade = CascadeType.ALL)
     private List<Subject> subjects;

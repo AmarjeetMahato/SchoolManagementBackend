@@ -1,10 +1,11 @@
 package com.schoolManagementDB.services.AddressService;
 
+import com.schoolManagementDB.domain.Address.dtos.AddressDto;
+import com.schoolManagementDB.domain.Address.repository.AddressRepository;
 import com.schoolManagementDB.dtos.AddressDto;
 import com.schoolManagementDB.entities.Address;
 import com.schoolManagementDB.exceptions.InternalServerError;
 import com.schoolManagementDB.exceptions.ResourceNotFoundException;
-import com.schoolManagementDB.mappers.AddressMapper;
 import com.schoolManagementDB.repositories.AddressRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService{
-    private final AddressRepo addressRepo;
+
+    private final AddressRepository addressRepo;
 
     @Override
     public Address createAddress(AddressDto addressDto) {

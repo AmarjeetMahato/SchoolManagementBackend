@@ -1,10 +1,9 @@
 package com.schoolManagementDB.domain.Address.entity;
 
-
-import com.schoolManagementDB.entities.Parents;
-import com.schoolManagementDB.entities.Students;
-import com.schoolManagementDB.entities.Teacher;
-import com.schoolManagementDB.enums.AddressOwnerType;
+import com.schoolManagementDB.domain.Address.enums.AddressOwnerType;
+import com.schoolManagementDB.domain.Parents.entity.Parents;
+import com.schoolManagementDB.domain.Students.entity.Student;
+import com.schoolManagementDB.domain.Teacher.entity.Teacher;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -23,7 +22,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)  // Add this line
 public class Address {
 
     @Id
@@ -65,7 +63,7 @@ public class Address {
     private List<Teacher> teachers;
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Students> students;
+    private List<Student> students;
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Parents> parents;

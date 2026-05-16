@@ -1,42 +1,45 @@
 package com.schoolManagementDB.domain.Address.dtos;
 
-
 import com.schoolManagementDB.domain.Address.enums.AddressOwnerType;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AddressDto {
+public class AddressResponseDto {
 
-    @NotBlank(message = "address line 1 is required !!")
+    private String addressId;
+
     private String addressLine1;
 
     private String addressLine2;
 
-    @NotBlank(message = "city is required !!")
     private String city;
 
-    @NotBlank(message = "state is required !!")
     private String state;
 
-    @NotBlank(message = "country is required !!")
     private String country;
 
-    @NotNull(message = "owner type is required !!")
     private AddressOwnerType ownerType;
 
-    @NotBlank(message = "postal code is required !!")
     private String postalCode;
 
-    @NotBlank(message = "address type is required !!")
     private String addressType;
+
+    // Relation Counts
+    private int totalTeachers;
+
+    private int totalStudents;
+
+    private int totalParents;
+
+    private LocalDateTime createAt;
+
+    private LocalDateTime updatedAt;
 }

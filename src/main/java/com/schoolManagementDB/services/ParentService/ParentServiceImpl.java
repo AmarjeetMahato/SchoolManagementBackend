@@ -8,7 +8,6 @@ import com.schoolManagementDB.entities.Students;
 import com.schoolManagementDB.exceptions.InternalServerError;
 import com.schoolManagementDB.exceptions.ResourceAlreadyExistsException;
 import com.schoolManagementDB.exceptions.ResourceNotFoundException;
-import com.schoolManagementDB.mappers.AddressMapper;
 import com.schoolManagementDB.mappers.ParentMapper;
 import com.schoolManagementDB.repositories.AddressRepo;
 import com.schoolManagementDB.repositories.ParentsRepo;

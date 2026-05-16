@@ -1,13 +1,12 @@
 package com.schoolManagementDB.domain.Parents.entity;
 
-import com.schoolManagementDB.entities.Address;
-import com.schoolManagementDB.entities.Students;
+import com.schoolManagementDB.domain.Address.entity.Address;
+import com.schoolManagementDB.domain.Students.entity.Student;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)  // Add this line
 public class Parents {
 
     @Id
@@ -70,7 +68,7 @@ public class Parents {
 
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Students> student = new ArrayList<>();
+    private List<Student> student = new ArrayList<>();
 
 
     @CreatedDate

@@ -2,8 +2,8 @@ package com.schoolManagementDB.domain.ExamDuties.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.schoolManagementDB.entities.ExamSchedules;
-import com.schoolManagementDB.entities.Teacher;
+import com.schoolManagementDB.domain.ExamSchedules.entity.ExamSchedules;
+import com.schoolManagementDB.domain.Teacher.entity.Teacher;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

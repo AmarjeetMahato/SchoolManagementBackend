@@ -1,10 +1,10 @@
 package com.schoolManagementDB.domain.Teacher.entity;
 
 
-import com.schoolManagementDB.entities.Address;
-import com.schoolManagementDB.entities.Classes;
-import com.schoolManagementDB.entities.ExamDuties;
-import com.schoolManagementDB.entities.Teacher_Subject_Section;
+import com.schoolManagementDB.domain.Address.entity.Address;
+import com.schoolManagementDB.domain.Classes.entity.Classes;
+import com.schoolManagementDB.domain.ExamDuties.entity.ExamDuties;
+import com.schoolManagementDB.domain.Teacher_Subject_Section.entity.TeacherSubjectSection;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)  // Add this line
 @Table(name = "teachers")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -88,7 +87,7 @@ public class Teacher {
 
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-    private List<Teacher_Subject_Section> assignedSubjects;
+    private List<TeacherSubjectSection> assignedSubjects;
 
 
     @CreatedDate

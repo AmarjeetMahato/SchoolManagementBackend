@@ -1,14 +1,13 @@
 package com.schoolManagementDB.domain.Teacher_Subject_Section.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.schoolManagementDB.entities.Section;
-import com.schoolManagementDB.entities.Subject;
-import com.schoolManagementDB.entities.Teacher;
+import com.schoolManagementDB.domain.Section.entity.Section;
+import com.schoolManagementDB.domain.Subject.entity.Subject;
+import com.schoolManagementDB.domain.Teacher.entity.Teacher;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -20,7 +19,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)  // Add this line
 public class TeacherSubjectSection {
 
     @Id

@@ -1,4 +1,4 @@
-package com.schoolManagementDB.enums;
+package com.schoolManagementDB.domain.Address.enums;
 
 public enum AddressOwnerType {
 

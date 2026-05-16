@@ -1,5 +1,8 @@
 package com.schoolManagementDB.services.StudentService;
 
+import com.schoolManagementDB.domain.Students.dtos.StudentResponseDto;
+import com.schoolManagementDB.domain.Students.dtos.StudentsDtos;
+import com.schoolManagementDB.domain.Students.entity.Student;
 import com.schoolManagementDB.dtos.StudentDto;
 import com.schoolManagementDB.entities.Students;
 
@@ -9,40 +12,40 @@ import java.util.List;
 public interface StudentService {
 
     // Create
-    Students createStudent(StudentDto studentDto);
+    StudentResponseDto createStudent(StudentsDtos studentDto);
 
     // Read (Single)
-    Students getStudent(String studentId);
+    StudentResponseDto getStudent(String studentId);
 
     // Read (All)
-    List<StudentDto> getAllStudents();
+    List<StudentResponseDto> getAllStudents();
 
     // Get by roll number
-    Students getStudentByRollNo(int studentRollNo);
+    StudentResponseDto getStudentByRollNo(int studentRollNo);
 
     // Update
-    Students updateStudent(String studentId, StudentDto studentDto);
+    StudentResponseDto updateStudent(String studentId, StudentsDtos  studentDto);
 
     // Delete
     void deleteStudent(String studentId);
 
     // Get by Class ID
-    List<StudentDto> getStudentsByClassId(String classId);
+    List<StudentResponseDto> getStudentsByClassId(String classId);
 
     // Get by Section ID
-    List<StudentDto> getStudentsBySectionId(String sectionId);
+    List<StudentResponseDto> getStudentsBySectionId(String sectionId);
 
     // Get by Parent ID
-    List<StudentDto> getStudentsByParentId(String parentId);
+    List<StudentResponseDto> getStudentsByParentId(String parentId);
 
     // Update status (active/inactive)
-    Students updateStudentStatus(String studentId, boolean isActive);
+    StudentResponseDto updateStudentStatus(String studentId, boolean isActive);
 
     // Search by name (optional, for admin)
-    List<StudentDto> searchStudentsByName(String nameKeyword);
+    List<StudentsDtos> searchStudentsByName(String nameKeyword);
 
     // Get students admitted after a date
-    List<StudentDto> getStudentsAdmittedAfter(LocalDateTime date);
+    List<StudentsDtos> getStudentsAdmittedAfter(LocalDateTime date);
 
 }
 

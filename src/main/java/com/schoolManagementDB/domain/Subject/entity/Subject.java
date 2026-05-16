@@ -1,10 +1,10 @@
 package com.schoolManagementDB.domain.Subject.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.schoolManagementDB.entities.Attendance;
-import com.schoolManagementDB.entities.Classes;
-import com.schoolManagementDB.entities.ExamSchedules;
-import com.schoolManagementDB.entities.Teacher_Subject_Section;
+import com.schoolManagementDB.domain.Attendance.entity.Attendance;
+import com.schoolManagementDB.domain.Classes.entity.Classes;
+import com.schoolManagementDB.domain.ExamSchedules.entity.ExamSchedules;
+import com.schoolManagementDB.services.TeacherSubjectSection.TeacherSubjectSection;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,7 +25,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@EntityListeners(AuditingEntityListener.class)
 public class Subject {
 
 
@@ -66,7 +65,7 @@ public class Subject {
     private List<ExamSchedules> examSchedules;
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
-    private List<Teacher_Subject_Section> teacherAssignments;
+    private List<TeacherSubjectSection> teacherAssignments;
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Attendance> attendanceList;

@@ -7,8 +7,6 @@ import com.schoolManagementDB.entities.Section;
 import com.schoolManagementDB.entities.Students;
 import com.schoolManagementDB.exceptions.InternalServerError;
 import com.schoolManagementDB.exceptions.ResourceNotFoundException;
-import com.schoolManagementDB.mappers.AddressMapper;
-import com.schoolManagementDB.mappers.StudentMapper;
 import com.schoolManagementDB.repositories.ClassRepo;
 import com.schoolManagementDB.repositories.SectionRepo;
 import com.schoolManagementDB.repositories.StudentsRepo;

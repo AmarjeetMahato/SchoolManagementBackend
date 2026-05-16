@@ -1,4 +1,6 @@
 package com.schoolManagementDB.domain.Students.controllers;
+import com.schoolManagementDB.domain.Students.dtos.StudentResponseDto;
+import com.schoolManagementDB.domain.Students.dtos.StudentsDtos;
 import com.schoolManagementDB.dtos.StudentDto;
 import com.schoolManagementDB.entities.Students;
 import com.schoolManagementDB.services.StudentService.StudentService;
@@ -21,9 +23,9 @@ public class StudentsControllers {
 
 
     @PostMapping("/create")
-    public ResponseEntity<?> createStudents(@RequestBody @Valid StudentDto studentDto){
+    public ResponseEntity<StudentResponseDto> createStudents(@RequestBody @Valid StudentsDtos studentDto){
 
-        Students createStudents = this.studentService.createStudent(studentDto);
+        StudentResponseDto createStudents = this.studentService.createStudent(studentDto);
         return  ResponseEntity.status(HttpStatus.CREATED).body(createStudents);
     }
 

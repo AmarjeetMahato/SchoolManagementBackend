@@ -24,7 +24,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)  // Add this line
 public class Classes {
     @Id
     @Column(nullable = false,updatable = false,unique = true)

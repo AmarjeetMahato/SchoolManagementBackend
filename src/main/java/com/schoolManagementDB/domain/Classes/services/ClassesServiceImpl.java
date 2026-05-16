@@ -1,9 +1,11 @@
 package com.schoolManagementDB.domain.Classes.services;
 
 import com.schoolManagementDB.domain.Classes.dtos.ClassDto;
+import com.schoolManagementDB.domain.Classes.dtos.ClassResponseDto;
+import com.schoolManagementDB.domain.Classes.dtos.ClassUpdateDto;
+import com.schoolManagementDB.domain.Classes.entity.Classes;
 import com.schoolManagementDB.domain.Classes.mapper.ClassMapper;
 import com.schoolManagementDB.domain.Classes.repository.ClassesRepository;
-import com.schoolManagementDB.entities.Classes;
 import com.schoolManagementDB.exceptions.InternalServerError;
 import com.schoolManagementDB.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
@@ -21,37 +23,33 @@ public class ClassesServiceImpl implements  IClassesService {
      private  final ClassMapper classMapper;
 
     @Override
-    public Classes createClass(ClassDto dto) {
-        if(dto == null){
-            throw new ResourceNotFoundException("class data is empty !!");
-        }
+    public ClassResponseDto createClass(ClassDto dto) {
+
         try{
-            if(classesRepository.findByName(dto.getName()).isPresent()){
+            if(classesRepository.findByCode(dto.getCode()).isPresent()){
                  throw  new ResourceNotFoundException("Class is already created");
             }
 
             // 2. Map the DTO to the Entity
             Classes classes = classMapper.toEntity(dto);
-
-            return  classesRepository.save(classes);
-
+            Classes saveedclasses =   classesRepository.save(classes);
+            return  classMapper.toResponse(saveedclasses);
         }catch(InternalServerError e){
             throw  new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public Classes updateClass(String classId, ClassDto dto) {
+    public ClassResponseDto updateClass(String classId, ClassUpdateDto dto) {
         try {
-            Classes existingClass = classRepo.findById(classId)
+            Classes existingClass = classesRepository.findById(classId)
                     .orElseThrow(() -> new ResourceNotFoundException("Class not found with id: " + classId));
 
-            existingClass.setName(dto.getName());
-            existingClass.setCode(dto.getCode());
-            existingClass.setDescription(dto.getDescription());
-            existingClass.setStatus(dto.getStatus());
+           classMapper.updateEntity(dto, existingClass);
 
-            return classRepo.save(existingClass);
+            Classes classes =  classesRepository.save(existingClass);
+
+            return classMapper.toResponse(classes);
         } catch (InternalServerError e) {
             throw new RuntimeException("Failed to update class", e);
         }
@@ -60,29 +58,33 @@ public class ClassesServiceImpl implements  IClassesService {
     @Override
     public void deleteClass(String classId) {
         try {
-            Classes existing = classRepo.findById(classId)
+            Classes existing = classesRepository.findById(classId)
                     .orElseThrow(() -> new ResourceNotFoundException("Class not found with id: " + classId));
-            classRepo.delete(existing);
+            classesRepository.delete(existing);
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete class", e);
         }
     }
 
     @Override
-    public Classes getClassById(String classId) {
+    public ClassResponseDto getClassById(String classId) {
         try {
-            return classRepo.findById(classId)
+            Classes classes =  classesRepository.findById(classId)
                     .orElseThrow(() -> new ResourceNotFoundException("Class not found with id: " + classId));
+
+            return  classMapper.toResponse(classes);
 
         } catch (Exception e) {
             throw new RuntimeException("Failed to get class", e);
         }    }
 
     @Override
-    public List<Classes> getAllClasses() {
+    public List<ClassResponseDto> getAllClasses() {
         try{
-            List<Classes> getAllClass = this.classRepo.findAll();
-            return  getAllClass;
+            List<Classes> getAllClass = this.classesRepository.findAll();
+            return getAllClass.stream()
+                    .map(classMapper::toResponse)
+                    .toList();
         }catch (InternalServerError e){
             throw new RuntimeException("Failed to get all classes");
         }

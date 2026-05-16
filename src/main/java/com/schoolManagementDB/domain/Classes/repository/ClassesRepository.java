@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ClassesRepository  extends JpaRepository<Classes,String> {
     Optional<Classes> findByName(String name);
+
+    Optional<Classes> findByCode(@NotBlank(message = "Class name is required !!") String name);
 }

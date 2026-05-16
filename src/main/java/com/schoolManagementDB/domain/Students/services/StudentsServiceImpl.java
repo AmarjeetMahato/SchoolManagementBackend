@@ -1,7 +1,9 @@
 package com.schoolManagementDB.domain.Students.services;
 
+import com.schoolManagementDB.domain.Address.dtos.AddressResponseDto;
 import com.schoolManagementDB.domain.Address.entity.Address;
 import com.schoolManagementDB.domain.Address.repository.AddressRepository;
+import com.schoolManagementDB.domain.Address.services.IAddressService;
 import com.schoolManagementDB.domain.Parents.entity.Parents;
 import com.schoolManagementDB.domain.Students.dtos.StudentResponseDto;
 import com.schoolManagementDB.domain.Students.dtos.StudentsDtos;
@@ -26,6 +28,7 @@ public class StudentsServiceImpl implements  IStudentsService {
     private  final StudentsRepository studentsRepository;
     private  final StudentsMapper studentMapper;
     private  final AddressRepository addressRepository;
+    private final IAddressService addressService;
 
     @Transactional
     @Override

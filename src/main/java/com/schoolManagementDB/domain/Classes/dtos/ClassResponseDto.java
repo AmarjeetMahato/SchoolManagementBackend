@@ -20,13 +20,13 @@ public class ClassResponseDto {
     private String status;
 
     // Return the teacher's ID and name instead of the whole entity object
-    private Long teacherId;
+    private String teacherId;
     private String teacherName;
 
     // Return lists of IDs or simple names for the related entities
     private List<String> sectionIds;
-    private List<Long> studentIds;
-    private List<Long> subjectIds;
+    private List<String> studentIds;
+    private List<String> subjectIds;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -1,9 +1,8 @@
 package com.schoolManagementDB.domain.Students.controllers;
 import com.schoolManagementDB.domain.Students.dtos.StudentResponseDto;
+import com.schoolManagementDB.domain.Students.dtos.StudentUpdateDto;
 import com.schoolManagementDB.domain.Students.dtos.StudentsDtos;
-import com.schoolManagementDB.dtos.StudentDto;
-import com.schoolManagementDB.entities.Students;
-import com.schoolManagementDB.services.StudentService.StudentService;
+import com.schoolManagementDB.domain.Students.services.IStudentsService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ import java.util.List;
 public class StudentsControllers {
 
 
-    private  final StudentService studentService;
+    private  final IStudentsService studentService;
 
 
     @PostMapping("/create")
@@ -31,32 +30,32 @@ public class StudentsControllers {
 
     // Get student by ID
     @GetMapping("/{studentId}")
-    public ResponseEntity<Students> getStudent(@PathVariable String studentId) {
-        Students student = studentService.getStudent(studentId);
+    public ResponseEntity<StudentResponseDto> getStudent(@PathVariable String studentId) {
+        StudentResponseDto student = studentService.getStudent(studentId);
         return ResponseEntity.ok(student);
     }
 
     // Get all students
     @GetMapping("/all")
-    public ResponseEntity<List<StudentDto>> getAllStudents() {
-        List<StudentDto> students = studentService.getAllStudents();
+    public ResponseEntity<List<StudentResponseDto>> getAllStudents() {
+        List<StudentResponseDto> students = studentService.getAllStudents();
         return ResponseEntity.ok(students);
     }
 
     // Get student by roll number
     @GetMapping("/rollno/{rollNo}")
-    public ResponseEntity<Students> getStudentByRollNo(@PathVariable int rollNo) {
-        Students student = studentService.getStudentByRollNo(rollNo);
+    public ResponseEntity<StudentResponseDto> getStudentByRollNo(@PathVariable int rollNo) {
+        StudentResponseDto student = studentService.getStudentByRollNo(rollNo);
         return ResponseEntity.ok(student);
     }
 
     // Update student
     @PutMapping("/update/{studentId}")
-    public ResponseEntity<Students> updateStudent(
+    public ResponseEntity<StudentResponseDto> updateStudent(
             @PathVariable String studentId,
-            @RequestBody @Valid StudentDto studentDto
+            @RequestBody @Valid StudentUpdateDto  studentDto
     ) {
-        Students updatedStudent = studentService.updateStudent(studentId, studentDto);
+        StudentResponseDto updatedStudent = studentService.updateStudent(studentId, studentDto);
         return ResponseEntity.ok(updatedStudent);
     }
 
@@ -69,47 +68,47 @@ public class StudentsControllers {
 
     // Get students by class ID
     @GetMapping("/class/{classId}")
-    public ResponseEntity<List<StudentDto>> getStudentsByClassId(@PathVariable String classId) {
-        List<StudentDto> students = studentService.getStudentsByClassId(classId);
+    public ResponseEntity<List<StudentResponseDto>> getStudentsByClassId(@PathVariable String classId) {
+        List<StudentResponseDto> students = studentService.getStudentsByClassId(classId);
         return ResponseEntity.ok(students);
     }
 
     // Get students by section ID
     @GetMapping("/section/{sectionId}")
-    public ResponseEntity<List<StudentDto>> getStudentsBySectionId(@PathVariable String sectionId) {
-        List<StudentDto> students = studentService.getStudentsBySectionId(sectionId);
+    public ResponseEntity<List<StudentResponseDto>> getStudentsBySectionId(@PathVariable String sectionId) {
+        List<StudentResponseDto> students = studentService.getStudentsBySectionId(sectionId);
         return ResponseEntity.ok(students);
     }
 
     // Get students by parent ID
     @GetMapping("/parent/{parentId}")
-    public ResponseEntity<List<StudentDto>> getStudentsByParentId(@PathVariable String parentId) {
-        List<StudentDto> students = studentService.getStudentsByParentId(parentId);
+    public ResponseEntity<List<StudentResponseDto>> getStudentsByParentId(@PathVariable String parentId) {
+        List<StudentResponseDto> students = studentService.getStudentsByParentId(parentId);
         return ResponseEntity.ok(students);
     }
 
     // Update student active/inactive status
     @PatchMapping("/status/{studentId}")
-    public ResponseEntity<Students> updateStudentStatus(
+    public ResponseEntity<StudentResponseDto> updateStudentStatus(
             @PathVariable String studentId,
             @RequestParam boolean isActive
     ) {
-        Students updated = studentService.updateStudentStatus(studentId, isActive);
+        StudentResponseDto updated = studentService.updateStudentStatus(studentId, isActive);
         return ResponseEntity.ok(updated);
     }
 
     // Search students by name
     @GetMapping("/search")
-    public ResponseEntity<List<StudentDto>> searchStudentsByName(@RequestParam String name) {
-        List<StudentDto> students = studentService.searchStudentsByName(name);
+    public ResponseEntity<List<StudentResponseDto>> searchStudentsByName(@RequestParam String name) {
+        List<StudentResponseDto> students = studentService.searchStudentsByName(name);
         return ResponseEntity.ok(students);
     }
 
     // Get students admitted after a date
     @GetMapping("/admitted-after")
-    public ResponseEntity<List<StudentDto>> getStudentsAdmittedAfter(@RequestParam String date) {
+    public ResponseEntity<List<StudentResponseDto>> getStudentsAdmittedAfter(@RequestParam String date) {
         LocalDateTime admissionDate = LocalDateTime.parse(date);
-        List<StudentDto> students = studentService.getStudentsAdmittedAfter(admissionDate);
+        List<StudentResponseDto> students = studentService.getStudentsAdmittedAfter(admissionDate);
         return ResponseEntity.ok(students);
     }
 }

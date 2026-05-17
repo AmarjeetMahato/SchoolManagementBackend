@@ -48,4 +48,7 @@ public class StudentsDtos {
     private String classId;  // List of Class IDs (instead of Classes entity)
 
     private String sectionId;  // Section ID (instead of Section entity)
+
+    // Parent
+    private String parentId;
 }

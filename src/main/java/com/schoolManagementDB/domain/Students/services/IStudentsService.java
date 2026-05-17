@@ -1,6 +1,7 @@
 package com.schoolManagementDB.domain.Students.services;
 
 import com.schoolManagementDB.domain.Students.dtos.StudentResponseDto;
+import com.schoolManagementDB.domain.Students.dtos.StudentUpdateDto;
 import com.schoolManagementDB.domain.Students.dtos.StudentsDtos;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public interface IStudentsService {
     StudentResponseDto getStudentByRollNo(int studentRollNo);
 
     // Update
-    StudentResponseDto updateStudent(String studentId, StudentsDtos  studentDto);
+    StudentResponseDto updateStudent(String studentId, StudentUpdateDto studentDto);
 
     // Delete
     void deleteStudent(String studentId);
@@ -39,9 +40,9 @@ public interface IStudentsService {
     StudentResponseDto updateStudentStatus(String studentId, boolean isActive);
 
     // Search by name (optional, for admin)
-    List<StudentsDtos> searchStudentsByName(String nameKeyword);
+    List<StudentResponseDto> searchStudentsByName(String nameKeyword);
 
     // Get students admitted after a date
-    List<StudentsDtos> getStudentsAdmittedAfter(LocalDateTime date);
+    List<StudentResponseDto> getStudentsAdmittedAfter(LocalDateTime date);
 
 }

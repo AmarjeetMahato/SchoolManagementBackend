@@ -1,8 +1,9 @@
 package com.schoolManagementDB.domain.Subject.controllers;
 
-import com.schoolManagementDB.dtos.SubjectDto;
-import com.schoolManagementDB.entities.Subject;
-import com.schoolManagementDB.services.SubjectService.SubjectService;
+import com.schoolManagementDB.domain.Subject.dtos.SubjectDto;
+import com.schoolManagementDB.domain.Subject.dtos.SubjectResponseDto;
+import com.schoolManagementDB.domain.Subject.dtos.SubjectUpdateDto;
+import com.schoolManagementDB.domain.Subject.services.ISubjectServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +16,20 @@ import java.util.List;
 public class SubjectControllers {
 
 
-    private  final SubjectService subjectService;
+    private  final ISubjectServices subjectService;
 
 
     @PostMapping("/create")
-    public ResponseEntity<Subject> createSubject(@RequestBody SubjectDto subjectDto) {
-        Subject createdSubject = subjectService.createSubject(subjectDto);
+    public ResponseEntity<SubjectResponseDto> createSubject(@RequestBody SubjectDto subjectDto) {
+        SubjectResponseDto createdSubject = subjectService.createSubject(subjectDto);
         return ResponseEntity.ok(createdSubject);
     }
 
     @PutMapping("/update/{subjectId}")
-    public ResponseEntity<Subject> updateSubject(
+    public ResponseEntity<SubjectResponseDto> updateSubject(
             @PathVariable String subjectId,
-            @RequestBody SubjectDto subjectDto) {
-        Subject updatedSubject = subjectService.updateSubject(subjectId, subjectDto);
+            @RequestBody SubjectUpdateDto subjectDto) {
+        SubjectResponseDto updatedSubject = subjectService.updateSubject(subjectId, subjectDto);
         return ResponseEntity.ok(updatedSubject);
     }
 
@@ -39,14 +40,14 @@ public class SubjectControllers {
     }
 
     @GetMapping("getSubject/{subjectId}")
-    public ResponseEntity<Subject> getSubjectById(@PathVariable String subjectId) {
-        Subject subject = subjectService.getSubjectById(subjectId);
+    public ResponseEntity<SubjectResponseDto> getSubjectById(@PathVariable String subjectId) {
+        SubjectResponseDto subject = subjectService.getSubjectById(subjectId);
         return ResponseEntity.ok(subject);
     }
 
     @GetMapping("get-all-subject")
-    public ResponseEntity<List<Subject>> getAllSubjects() {
-        List<Subject> allSubjects = subjectService.getAllSubjects();
+    public ResponseEntity<List<SubjectResponseDto>> getAllSubjects() {
+        List<SubjectResponseDto> allSubjects = subjectService.getAllSubjects();
         return ResponseEntity.ok(allSubjects);
     }
 }

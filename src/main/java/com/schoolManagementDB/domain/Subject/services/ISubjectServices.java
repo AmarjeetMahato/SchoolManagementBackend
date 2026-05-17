@@ -1,18 +1,20 @@
 package com.schoolManagementDB.domain.Subject.services;
 
 import com.schoolManagementDB.domain.Subject.dtos.SubjectDto;
+import com.schoolManagementDB.domain.Subject.dtos.SubjectResponseDto;
+import com.schoolManagementDB.domain.Subject.dtos.SubjectUpdateDto;
 
 import java.util.List;
 
 public interface ISubjectServices {
 
-    Subject createSubject(SubjectDto subjectDto);
+    SubjectResponseDto createSubject(SubjectDto subjectDto);
 
-    Subject updateSubject(String subjectId, SubjectDto subjectDto);
+    SubjectResponseDto updateSubject(String subjectId, SubjectUpdateDto subjectDto);
 
     void deleteSubject(String subjectId);
 
-    Subject getSubjectById(String subjectId);
+    SubjectResponseDto getSubjectById(String subjectId);
 
-    List<Subject> getAllSubjects();
+    List<SubjectResponseDto> getAllSubjects();
 }

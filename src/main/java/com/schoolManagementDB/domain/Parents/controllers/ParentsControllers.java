@@ -1,9 +1,9 @@
 package com.schoolManagementDB.domain.Parents.controllers;
 
-import com.schoolManagementDB.dtos.ParentDto;
-import com.schoolManagementDB.dtos.ParentRequestDto;
-import com.schoolManagementDB.entities.Parents;
-import com.schoolManagementDB.services.ParentService.ParentService;
+import com.schoolManagementDB.domain.Parents.dtos.ParentsDto;
+import com.schoolManagementDB.domain.Parents.dtos.ParentsResponseDto;
+import com.schoolManagementDB.domain.Parents.dtos.ParentsUpdateDto;
+import com.schoolManagementDB.domain.Parents.services.IParentsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,30 +16,27 @@ import java.util.List;
 public class ParentsControllers {
 
 
-    private final ParentService parentService;
-
+    private final IParentsService parentService;
 
     @PostMapping("/create")
-    public ResponseEntity<Parents> createParent(@RequestBody ParentRequestDto parentDto) {
-        Parents savedParent = parentService.createParent(
-                parentDto.getParentDto(),
-                parentDto.getAddressDto(),
-                parentDto.getStudentIds());
+    public ResponseEntity<ParentsResponseDto> createParent(@RequestBody ParentsDto parentDto) {
+        ParentsResponseDto savedParent = parentService.createParent(parentDto);
         return ResponseEntity.ok(savedParent);
     }
 
     @GetMapping("/get-all-parents")
-    public ResponseEntity<List<ParentDto>> getAllParents() {
+    public ResponseEntity<List<ParentsResponseDto>> getAllParents() {
         return ResponseEntity.ok(parentService.getAllParents());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Parents> getParentById(@PathVariable String id) {
+    public ResponseEntity<ParentsResponseDto> getParentById(@PathVariable String id) {
         return ResponseEntity.ok(parentService.getParentById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Parents> updateParent(@PathVariable String id, @RequestBody ParentDto parentDto) {
+    public ResponseEntity<ParentsResponseDto> updateParent(
+            @PathVariable String id, @RequestBody ParentsUpdateDto parentDto) {
         return ResponseEntity.ok(parentService.updateParent(id, parentDto));
     }
 
@@ -50,17 +47,17 @@ public class ParentsControllers {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ParentDto>> searchByName(@RequestParam("keyword") String keyword) {
+    public ResponseEntity<List<ParentsResponseDto>> searchByName(@RequestParam("keyword") String keyword) {
         return ResponseEntity.ok(parentService.searchParentsByName(keyword));
     }
 
     @GetMapping("/by-phone")
-    public ResponseEntity<Parents> getParentByPhone(@RequestParam("phone") String phone) {
+    public ResponseEntity<ParentsResponseDto> getParentByPhone(@RequestParam("phone") String phone) {
         return ResponseEntity.ok(parentService.getParentByPhone(phone));
     }
 
     @GetMapping("/children-over")
-    public ResponseEntity<List<ParentDto>> getParentsWithManyChildren(@RequestParam("count") int minChildren) {
+    public ResponseEntity<List<ParentsResponseDto>> getParentsWithManyChildren(@RequestParam("count") int minChildren) {
         return ResponseEntity.ok(parentService.getParentsWithMoreThanNChildren(minChildren));
     }
 }

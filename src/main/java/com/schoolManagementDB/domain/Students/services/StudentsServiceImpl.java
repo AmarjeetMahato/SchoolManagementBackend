@@ -4,7 +4,11 @@ import com.schoolManagementDB.domain.Address.dtos.AddressResponseDto;
 import com.schoolManagementDB.domain.Address.entity.Address;
 import com.schoolManagementDB.domain.Address.repository.AddressRepository;
 import com.schoolManagementDB.domain.Address.services.IAddressService;
+import com.schoolManagementDB.domain.Classes.entity.Classes;
+import com.schoolManagementDB.domain.Classes.repository.ClassesRepository;
 import com.schoolManagementDB.domain.Parents.entity.Parents;
+import com.schoolManagementDB.domain.Section.entity.Section;
+import com.schoolManagementDB.domain.Section.repository.SectionRepository;
 import com.schoolManagementDB.domain.Students.dtos.StudentResponseDto;
 import com.schoolManagementDB.domain.Students.dtos.StudentsDtos;
 import com.schoolManagementDB.domain.Students.entity.Student;
@@ -24,7 +28,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class StudentsServiceImpl implements  IStudentsService {
-
+    private final SectionRepository sectionRepository;
+    private  final ClassesRepository classesRepository;
     private  final StudentsRepository studentsRepository;
     private  final StudentsMapper studentMapper;
     private  final AddressRepository addressRepository;
@@ -35,25 +40,18 @@ public class StudentsServiceImpl implements  IStudentsService {
     public StudentResponseDto createStudent(StudentsDtos studentDto) {
         try {
 
-            // DuplicateCheck
-            // Duplicate Check
             boolean exists = studentsRepository.existsByRollNumberAndClasses_ClassId(
                     studentDto.getRollNumber(),
                     studentDto.getClassId()
             );
-
             // 1. Map DTO to Entity
             if (exists) {
                 throw new ResourceAlreadyExistsException(
-                        "Student already exists with roll number: "
-                                + studentDto.getRollNumber()
+                        "Student already exists with roll number"
                 );
             }
-
             // 1. DTO -> Entity
             Student student = studentMapper.toEntity(studentDto);
-
-
             // 2. Handle Address
             if (studentDto.getAddress() != null) {
 
@@ -67,16 +65,11 @@ public class StudentsServiceImpl implements  IStudentsService {
                 student.setAddress(address);
             }
 
-             /*
-         |--------------------------------------------------------------------------
-         | Class Handling
-         |--------------------------------------------------------------------------
-         */
             if (studentDto.getClassId() != null &&
                     !studentDto.getClassId().isBlank()) {
 
-                Classes classes = classService.getClassEntityById(
-                        studentDto.getClassId()
+                Classes classes = classesRepository.findById(studentDto.getClassId()).orElseThrow(
+                        ()-> new ResourceNotFoundException("class not found")
                 );
 
                 student.setClasses(classes);
@@ -89,11 +82,9 @@ public class StudentsServiceImpl implements  IStudentsService {
          */
             if (studentDto.getSectionId() != null &&
                     !studentDto.getSectionId().isBlank()) {
-
-                Section section = sectionService.getSectionEntityById(
-                        studentDto.getSectionId()
+                Section section = sectionRepository.findById(studentDto.getSectionId()).orElseThrow(
+                        ()-> new ResourceNotFoundException("class not found")
                 );
-
                 student.setSection(section);
             }
 

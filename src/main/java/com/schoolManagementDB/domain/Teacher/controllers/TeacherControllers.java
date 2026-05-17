@@ -1,9 +1,10 @@
 package com.schoolManagementDB.domain.Teacher.controllers;
 
 
-import com.schoolManagementDB.dtos.TeacherDto;
-import com.schoolManagementDB.entities.Teacher;
-import com.schoolManagementDB.services.TeacherService.TeacherService;
+import com.schoolManagementDB.domain.Teacher.dtos.TeacherDto;
+import com.schoolManagementDB.domain.Teacher.dtos.TeacherResponseDto;
+import com.schoolManagementDB.domain.Teacher.dtos.TeacherUpdateDto;
+import com.schoolManagementDB.domain.Teacher.services.ITeacherService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,35 +20,35 @@ import java.util.List;
 public class TeacherControllers {
 
 
-    private final TeacherService teacherService;
+    private final ITeacherService  teacherService;
 
     // Create a teacher
     @PostMapping("/create")
-    public ResponseEntity<Teacher> createTeacher(@RequestBody @Valid TeacherDto teacherDto) {
-        Teacher createdTeacher = teacherService.createTeacher(teacherDto);
+    public ResponseEntity<TeacherResponseDto> createTeacher(@RequestBody @Valid TeacherDto teacherDto) {
+        TeacherResponseDto createdTeacher = teacherService.createTeacher(teacherDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTeacher);
     }
 
     // Get all teachers
     @GetMapping("/all")
-    public ResponseEntity<List<TeacherDto>> getAllTeachers() {
-        List<TeacherDto> teachers = teacherService.getAllTeachers();
+    public ResponseEntity<List<TeacherResponseDto>> getAllTeachers() {
+        List<TeacherResponseDto> teachers = teacherService.getAllTeachers();
         return ResponseEntity.status(HttpStatus.OK).body(teachers);
     }
 
     // Get teacher by ID
     @GetMapping("/{teacherId}")
-    public ResponseEntity<Teacher> getTeacherById(@PathVariable String teacherId) {
-        Teacher teacher = teacherService.getTeacherById(teacherId);
+    public ResponseEntity<TeacherResponseDto> getTeacherById(@PathVariable String teacherId) {
+        TeacherResponseDto teacher = teacherService.getTeacherById(teacherId);
         return ResponseEntity.status(HttpStatus.OK).body(teacher);
     }
 
     // Update teacher details
     @PutMapping("/update/{teacherId}")
-    public ResponseEntity<Teacher> updateTeacher(
+    public ResponseEntity<TeacherResponseDto> updateTeacher(
             @PathVariable String teacherId,
-            @RequestBody @Valid TeacherDto teacherDto) {
-        Teacher updatedTeacher = teacherService.updateTeacher(teacherId, teacherDto);
+            @RequestBody @Valid TeacherUpdateDto teacherDto) {
+        TeacherResponseDto updatedTeacher = teacherService.updateTeacher(teacherId, teacherDto);
         return ResponseEntity.status(HttpStatus.OK).body(updatedTeacher);
     }
 
@@ -60,45 +61,47 @@ public class TeacherControllers {
 
     // Get teacher by email
     @GetMapping("/email/{email}")
-    public ResponseEntity<Teacher> getTeacherByEmail(@PathVariable String email) {
-        Teacher teacher = teacherService.getTeacherByEmail(email);
+    public ResponseEntity<TeacherResponseDto> getTeacherByEmail(@PathVariable String email) {
+        TeacherResponseDto teacher = teacherService.getTeacherByEmail(email);
         return ResponseEntity.status(HttpStatus.OK).body(teacher);
     }
 
     // Get teacher by phone number
     @GetMapping("/phone/{phone}")
-    public ResponseEntity<Teacher> getTeacherByPhone(@PathVariable String phone) {
-        Teacher teacher = teacherService.getTeacherByPhone(phone);
+    public ResponseEntity<TeacherResponseDto> getTeacherByPhone(@PathVariable String phone) {
+        TeacherResponseDto teacher = teacherService.getTeacherByPhone(phone);
         return ResponseEntity.status(HttpStatus.OK).body(teacher);
     }
 
     // Get teachers by status (active/inactive)
     @GetMapping("/status/{status}")
-    public ResponseEntity<List<TeacherDto>> getTeachersByStatus(@PathVariable String status) {
-        List<TeacherDto> teachers = teacherService.getTeachersByStatus(status);
+    public ResponseEntity<List<TeacherResponseDto>> getTeachersByStatus(@PathVariable String status) {
+        List<TeacherResponseDto> teachers = teacherService.getTeachersByStatus(status);
         return ResponseEntity.status(HttpStatus.OK).body(teachers);
     }
 
     // Search teachers by name (first, middle, or last name)
     @GetMapping("/search/{nameKeyword}")
-    public ResponseEntity<List<TeacherDto>> searchTeachersByName(@PathVariable String nameKeyword) {
-        List<TeacherDto> teachers = teacherService.searchTeachersByName(nameKeyword);
+    public ResponseEntity<List<TeacherResponseDto>> searchTeachersByName(@PathVariable String nameKeyword) {
+        List<TeacherResponseDto> teachers = teacherService.searchTeachersByName(nameKeyword);
         return ResponseEntity.status(HttpStatus.OK).body(teachers);
     }
 
     // Get teachers hired after a specific date
     @GetMapping("/hired-after/{date}")
-    public ResponseEntity<List<TeacherDto>> getTeachersHiredAfter(@PathVariable String date) {
-        List<TeacherDto> teachers = teacherService.getTeachersHiredAfter(LocalDate.parse(date));
+    public ResponseEntity<List<TeacherResponseDto>> getTeachersHiredAfter(@PathVariable String date) {
+        List<TeacherResponseDto> teachers = teacherService.getTeachersHiredAfter(LocalDate.parse(date));
         return ResponseEntity.status(HttpStatus.OK).body(teachers);
     }
 
     // Update teacher status (active/inactive)
     @PatchMapping("/status/update/{teacherId}")
-    public ResponseEntity<Teacher> updateTeacherStatus(
+    public ResponseEntity<TeacherResponseDto> updateTeacherStatus(
             @PathVariable String teacherId,
-            @RequestParam String status) {
-        Teacher updatedTeacher = teacherService.updateTeacherStatus(teacherId, status);
+            @RequestParam String status
+    ) {
+
+        TeacherResponseDto updatedTeacher = teacherService.updateTeacherStatus(teacherId, status);
         return ResponseEntity.status(HttpStatus.OK).body(updatedTeacher);
     }
 }

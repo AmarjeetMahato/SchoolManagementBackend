@@ -1,4 +1,4 @@
-package com.schoolManagementDB.domain.Teacher_Subject_Section.entity;
+package com.schoolManagementDB.domain.TeacherSubjectSection.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.schoolManagementDB.domain.Section.entity.Section;

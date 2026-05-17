@@ -4,7 +4,7 @@ package com.schoolManagementDB.domain.Teacher.entity;
 import com.schoolManagementDB.domain.Address.entity.Address;
 import com.schoolManagementDB.domain.Classes.entity.Classes;
 import com.schoolManagementDB.domain.ExamDuties.entity.ExamDuties;
-import com.schoolManagementDB.domain.Teacher_Subject_Section.entity.TeacherSubjectSection;
+import com.schoolManagementDB.domain.TeacherSubjectSection.entity.TeacherSubjectSection;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -12,7 +12,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

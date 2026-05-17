@@ -1,4 +1,4 @@
-package com.schoolManagementDB.domain.Teacher_Subject_Section.controllers;
+package com.schoolManagementDB.domain.TeacherSubjectSection.controllers;
 
 
 import com.schoolManagementDB.dtos.TeacherSubjectSectionDto;

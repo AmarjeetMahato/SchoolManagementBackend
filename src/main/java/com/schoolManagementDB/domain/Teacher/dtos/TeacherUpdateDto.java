@@ -1,7 +1,9 @@
 package com.schoolManagementDB.domain.Teacher.dtos;
 
-import com.schoolManagementDB.domain.Address.dtos.AddressDto;
-import jakarta.validation.constraints.*;
+import com.schoolManagementDB.domain.Address.dtos.AddressUpdateDto;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,20 +15,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TeacherDto {
+public class TeacherUpdateDto {
 
-    @NotBlank(message = "First name is required")
     @Size(min = 2, max = 100, message = "First name must be between 2 and 100 characters")
     private String firstName;
 
     @Size(max = 100, message = "Middle name must not exceed 100 characters")
     private String middleName;
 
-    @NotBlank(message = "Last name is required")
     @Size(min = 2, max = 100, message = "Last name must be between 2 and 100 characters")
     private String lastName;
 
-    @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
     private String email;
 
@@ -36,31 +35,26 @@ public class TeacherDto {
     )
     private String phone;
 
-    @NotNull(message = "Date of birth is required")
     private LocalDate dateOfBirth;
 
-    @NotBlank(message = "Gender is required")
     @Pattern(
             regexp = "MALE|FEMALE|OTHER",
             message = "Gender must be MALE, FEMALE or OTHER"
     )
     private String gender;
 
-    @NotBlank(message = "Qualification is required")
     @Size(max = 200, message = "Qualification must not exceed 200 characters")
     private String qualification;
 
     private String profilePic;
 
-    @NotNull(message = "Hire date is required")
     private LocalDate hireDate;
 
-    @NotBlank(message = "Status is required")
     @Pattern(
             regexp = "ACTIVE|INACTIVE",
             message = "Status must be ACTIVE or INACTIVE"
     )
     private String status;
 
-    private AddressDto address;
+    private AddressUpdateDto address;
 }

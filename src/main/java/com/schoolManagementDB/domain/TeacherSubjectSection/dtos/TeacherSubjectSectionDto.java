@@ -1,4 +1,4 @@
-package com.schoolManagementDB.domain.Teacher_Subject_Section.dtos;
+package com.schoolManagementDB.domain.TeacherSubjectSection.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

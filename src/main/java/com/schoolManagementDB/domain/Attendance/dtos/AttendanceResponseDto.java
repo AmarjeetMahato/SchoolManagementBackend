@@ -1,37 +1,46 @@
 package com.schoolManagementDB.domain.Attendance.dtos;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AttendanceDto {
+public class AttendanceResponseDto {
 
-    @NotNull(message = "Attendance date is required")
+    private String attendanceId;
+
     private LocalDate attendanceDate;
 
-    @NotBlank(message = "Attendance status is required (PRESENT/ABSENT/LATE)")
     private String status;
 
-    @NotBlank(message = "MarkedBy (Admin ID) is required")
     private String markedBy;
 
     private String remarks;
 
-    @NotBlank(message = "Student ID is required")
     private String studentId;
 
-    @NotBlank(message = "Section ID is required")
+    private String firstName;
+
+    private  String lastName;
+
     private String sectionId;
 
-    @NotBlank(message = "Subject ID is required")
+    private String sectionName;
+
     private String subjectId;
+
+    private String subjectName;
+
+    private LocalDateTime createAt;
+
+    private LocalDateTime updatedAt;
+
+    // getters and setters
 }

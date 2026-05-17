@@ -1,44 +1,39 @@
 package com.schoolManagementDB.domain.Subject.dtos;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
-
-
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SubjectDto {
+public class SubjectUpdateDto {
 
-    @NotBlank(message = "Subject name is required")
     @Size(min = 2, max = 100, message = "Subject name must be between 2 and 100 characters")
     private String name;
 
-    @NotBlank(message = "Subject code is required")
     @Size(min = 2, max = 20, message = "Subject code must be between 2 and 20 characters")
     private String code;
 
-    @NotNull(message = "Start time is required")
     private LocalDateTime startTime;
 
-    @NotNull(message = "End time is required")
     private LocalDateTime endTime;
 
     @Size(max = 500, message = "Description must not exceed 500 characters")
     private String description;
 
-    @NotBlank(message = "Class ID is required")
+    @Pattern(
+            regexp = "^[a-zA-Z0-9\\-]+$",
+            message = "Invalid class ID format"
+    )
     private String classId;
 
-    @NotBlank(message = "Status is required")
     @Pattern(
             regexp = "ACTIVE|INACTIVE",
             message = "Status must be ACTIVE or INACTIVE"

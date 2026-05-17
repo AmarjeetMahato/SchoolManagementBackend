@@ -2,8 +2,16 @@ package com.schoolManagementDB.domain.Section.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class SectionDtos {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class SectionDto {
 
     @NotBlank(message = "Class name is required")
     @Size(max = 100, message = "Class name must not exceed 100 characters")

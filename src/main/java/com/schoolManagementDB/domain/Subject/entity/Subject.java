@@ -27,7 +27,6 @@ import java.util.UUID;
 @Builder
 public class Subject {
 
-
     @Id
     @Column(nullable = false,unique = true, updatable = false)
     private  String subjectId;
@@ -72,7 +71,7 @@ public class Subject {
 
 
     @CreatedDate
-    @Column(nullable = true, updatable = false)  // Ensure nullable = true
+    @Column(updatable = false)  // Ensure nullable = true
     private LocalDateTime createdAt;
 
     @LastModifiedDate // Automatically updates on modification

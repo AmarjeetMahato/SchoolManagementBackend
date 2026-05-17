@@ -25,7 +25,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)  // Add this line
 public class Section {
 
     @Id
